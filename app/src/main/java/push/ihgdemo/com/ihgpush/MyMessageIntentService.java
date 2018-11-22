@@ -20,7 +20,6 @@ import static push.ihgdemo.com.ihgpush.MyMessageReceiver.REC_TAG;
  * 1. 创建IntentService并继承AliyunMessageIntentService
  * 2. 覆写相关方法,并在Manifest的注册该Service
  * 3. 调用接口CloudPushService.setPushIntentService
- * 详细用户可参考:https://help.aliyun.com/document_detail/30066.html#h2-2-messagereceiver-aliyunmessageintentservice
  */
 
 public class MyMessageIntentService extends AliyunMessageIntentService {
@@ -38,8 +37,6 @@ public class MyMessageIntentService extends AliyunMessageIntentService {
     protected void onNotification(Context context, String title, String summary, Map<String, String> extraMap) {
         Log.i(REC_TAG, "收到一条推送通知 ： " + title + ", summary:" + summary);
         MainApplication.setConsoleText("收到一条推送通知 ： " + title + ", summary:" + summary);
-        notifyMessage(title,summary);
-
     }
 
     /**
@@ -109,23 +106,5 @@ public class MyMessageIntentService extends AliyunMessageIntentService {
     protected void onNotificationReceivedInApp(Context context, String title, String summary, Map<String, String> extraMap, int openType, String openActivity, String openUrl) {
         Log.i(REC_TAG, "onNotificationReceivedInApp ： " + " : " + title + " : " + summary + "  " + extraMap + " : " + openType + " : " + openActivity + " : " + openUrl);
         MainApplication.setConsoleText("onNotificationReceivedInApp ： " + " : " + title + " : " + summary);
-    }
-
-    public void notifyMessage(String title, String content) {
-        Log.i(REC_TAG,"222222");
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new NotificationCompat.Builder(this,"1")
-                .setPriority(Notification.PRIORITY_DEFAULT)  //通知的优先级
-                .setCategory(Notification.CATEGORY_MESSAGE)  //通知的类型
-                .setTicker(title)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.launcher)
-                .setVisibility(VISIBILITY_PUBLIC)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.launcher))
-                .setAutoCancel(true)
-                .build();
-        manager.notify(1, notification);
     }
 }

@@ -12,6 +12,7 @@ import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.sdk.android.push.register.HuaWeiRegister;
+import com.alibaba.sdk.android.push.register.MiPushRegister;
 
 
 public class MainApplication extends Application {
@@ -49,7 +50,7 @@ public class MainApplication extends Application {
             }
         });
         pushService.setPushIntentService(MyMessageIntentService.class);
-//        MiPushRegister.register(applicationContext, "XIAOMI_ID", "XIAOMI_KEY"); // 初始化小米辅助推送
+        MiPushRegister.register(applicationContext, "2882303761517897484", "5421789799484"); // 初始化小米辅助推送
         HuaWeiRegister.register(applicationContext); // 接入华为辅助推送
 //        GcmRegister.register(applicationContext, "send_id", "application_id"); // 接入FCM/GCM初始化推送
     }
